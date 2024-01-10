@@ -9,126 +9,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Board</title>
-    <link rel="stylesheet" href="{% static 'Tasks.css' %}">
-    <!-- Include the draggable library CSS -->
+    <link rel="stylesheet" href="{% static 'tasks.css' %}">
+   
     <link rel="stylesheet" href="https://unpkg.com/@shopify/draggable/lib/draggable.bundle.legacy.css">
-    <!-- Add this script tag to include the draggable library -->
-<script src="https://unpkg.com/@shopify/draggable/lib/draggable.bundle.legacy.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/@shopify/draggable/lib/draggable.bundle.legacy.js"></script>
 </head>
 
 <body>
     <nav>
         <a href="{% url 'Homepage' %}">Home</a>
         <a href="{% url 'create_task_list' %}">Create Task List</a>
-        <a href="{% url 'login' %}" class="login-button">Login</a>
         
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="login-button">Login</a>
+        {% endif %}
     </nav>
+
     <div>
         {% if request.user.is_authenticated %}
-            <p>Welcome, {{ request.user.username }}!</p>
+            <p class="welcome">Welcome, {{ request.user.username }}!</p>
         {% else %}
             <p>Please log in to access your tasks.</p>
         {% endif %}
     </div>
 
-
-<div class="login-container">
-    {% if request.user.is_authenticated %}
-        <a href="{% url 'logout' %}" class="logout-button">Logout</a>
-    {% else %}
-        <a href="{% url 'login' %}" class="login-button">Login</a>
-    {% endif %}
-</div>
-
-<h1>Task Board</h1>
-
-<div class="task-list-container">
-    {% if task_lists %}
-        {% for task_list in task_lists %}
-            <div class="task-list-box">
-                <h2><a href="{% url 'task_detail' task_list.id %}">{{ task_list.name }}</a></h2>
-
-                {% if tasks %}
-                    <ul>
-                        {% for task in tasks %}
-                            {% if task.task_list == task_list %}
-                                <!-- Add the 'draggable' attribute to each task element -->
-                                <li draggable="true" data-task-id="{{ task.id }}">
-                                    {{ task.title }} - {{ task.description }} - Due: {{ task.due_date }} - Completed: {{ task.completed }}
-                                    <div class="action-buttons">
-                                        <a href="{% url 'edit_task' task_list.id task.id %}">Edit</a>
-                                        <a href="{% url 'delete_task' task_list.id task.id %}">Delete Task</a>
-                                    </div>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No tasks in this list.</p>
-                {% endif %}
-
-                <form method="post" action="{% url 'create_task' task_list.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Create Task</button>
-                </form>
-
-               
-                <form method="post" action="{% url 'delete_task_list' task_list.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Delete List</button>
-                </form>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>No task lists available.</p>
-    {% endif %}
-
-   
-    <div class="task-list-box create-list-box">
-        <h2>Create a New List</h2>
-        <form method="post" action="{% url 'create_task_list' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Create List</button>
-        </form>
+    <div>
+        <p class="first">"Your future is created by what you do today, not tomorrow." - Robert Kiyosaki</p>
     </div>
-</div>
 
+    <h1 class="Head1">Task Board</h1>
 
+    <div class="task-list-container">
+        {% if task_lists %}
+            {% for task_list in task_lists %}
+                <div class="task-list-box">
+                    <h2><a href="{% url 'task_detail' task_list.id %}">{{ task_list.name }}</a></h2>
 
-<!-- Include the draggable library script -->
-<script src="https://unpkg.com/@shopify/draggable/lib/draggable.bundle.legacy.js"></script>
+                    {% if tasks %}
+                        <ul>
+                            {% for task in tasks %}
+                                {% if task.task_list == task_list %}
+                                    <li draggable="true" data-task-id="{{ task.id }}">
+                                        <!-- Add a checkbox for completion -->
+                                        <input type="checkbox" id="task{{ task.id }}" name="completed" {% if task.completed %}checked{% endif %}>
+                                        <label for="task{{ task.id }}">
+                                            {{ task.title }} - {{ task.description }} - Due: {{ task.due_date }}
+                                        </label>
+                                        <div class="action-buttons">
+                                            <a href="{% url 'edit_task' task_list.id task.id %}">Edit</a>
+                                            <a href="{% url 'delete_task' task_list.id task.id %}">Delete Task</a>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No tasks in this list.</p>
+                    {% endif %}
 
-<!-- Your custom script for drag-and-drop -->
-<script>
-    // Wait for the DOM to be ready
-    document.addEventListener("DOMContentLoaded", function () {
-        // Initialize the Draggable library
-        const draggable = new Draggable.Draggable(document.querySelectorAll("li[draggable='true']"), {
-            draggable: 'li',  // Set the draggable selector
-            delay: 100,  // Delay before dragging starts
+                    <form method="post" action="{% url 'create_task' task_list.id %}" class="create-task-form">
+                        {% csrf_token %}
+                        <button type="submit">Create Task</button>
+                    </form>
+                    
+                    <form method="post" action="{% url 'delete_task_list' task_list.id %}" class="delete-list-form">
+                        {% csrf_token %}
+                        <button type="submit">Delete List</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No task lists available.</p>
+        {% endif %}
+
+        <div class="task-list-box create-list-box">
+            <h2>Create a New List</h2>
+            <form method="post" action="{% url 'create_task_list' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="create-list-button">
+                    <i class="fas fa-plus"></i> Create List
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/@shopify/draggable/lib/draggable.bundle.legacy.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const draggable = new Draggable.Draggable(document.querySelectorAll("li[draggable='true']"), {
+                draggable: 'li',
+                delay: 100,
+            });
+
+            draggable.on('drag:start', (event) => {
+                console.log('Drag started:', event);
+            });
+
+            draggable.on('drag:stop', (event) => {
+                console.log('Drag stopped:', event);
+            });
+
+            draggable.on('droppable:dropped', (event) => {
+                console.log('Dropped:', event);
+            });
         });
-
-        // Add event listeners for the drag events
-        draggable.on('drag:start', (event) => {
-            // Handle the start of the drag
-            console.log('Drag started:', event);
-        });
-
-        draggable.on('drag:stop', (event) => {
-            // Handle the end of the drag
-            console.log('Drag stopped:', event);
-        });
-
-        // Add event listeners for drop events (adjust based on your needs)
-        draggable.on('droppable:dropped', (event) => {
-            // Handle the drop
-            console.log('Dropped:', event);
-            // You can get the source and destination lists/tasks and update your data accordingly
-        });
-    });
-</script>
+    </script>
 
 </body>
 

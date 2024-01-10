@@ -2,6 +2,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
+    background-image: url(https://dolphinint.com.my/wp-content/uploads/2022/12/banner-1.jpg);
 }
 
 .task-list-container {
@@ -32,8 +33,8 @@ body {
 }
 
 .task-list-box a {
-    margin-right: 10px;
-    color: #3366cc;
+   align-items: center;
+    color: #000000;
     text-decoration: none;
 }
 
@@ -43,7 +44,7 @@ body {
 
 /* Style for create new list box */
 .task-list-box.create-list-box {
-    background-color: #e2e2e2;
+    background-color: #fff5f5;
 }
 
 /* Style for delete and edit buttons */
@@ -53,7 +54,7 @@ body {
 
 .task-list-box .action-buttons a {
     margin-right: 10px;
-    color: #cc3333;
+    color: #000000;
     text-decoration: none;
 }
 
@@ -75,7 +76,7 @@ div a {
     display: inline-block;
     padding: 10px 20px;
     margin-top: 20px;
-    background-color: #3498db; /* Change the color as needed */
+    background-color: #0000005b; /* Change the color as needed */
     color: #fff;
     text-decoration: none;
     font-size: 16px;
@@ -112,14 +113,91 @@ div a:hover {
 
 
 nav {
-    background-color: #333;
-    color: white;
+    background-color: #6f97972a;
+    color: rgb(0, 0, 0);
     padding: 10px;
-    text-align: center;
+    text-align: end;
 }
 
 nav a {
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
     margin: 0 15px;
+}
+
+.Head1{
+    text-align: center;
+}
+    
+
+.welcome-message, .login-prompt {
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.welcome-message {
+    color: #00cc00;  /* Green color for the welcome message */
+}
+
+.login-prompt {
+    color: #ff3333;  /* Red color for the login prompt */
+}
+h1 {
+    margin-bottom: 20px;
+}
+
+.welcome{
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+.first{
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    font-style: italic;
+}
+form.create-task-form button {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    padding: 10px 15px; /* Padding around text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Add a pointer cursor on hover */
+}
+
+/* Add some margin to separate the buttons */
+form.create-task-form {
+    margin-bottom: 20px;
+}
+
+/* Style for the Delete List button */
+form.delete-list-form button {
+    background-color: #f44336; /* Red background color */
+    color: white; /* White text color */
+    padding: 10px 15px; /* Padding around text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Add a pointer cursor on hover */
+
+
+}
+.create-list-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.create-list-button:hover {
+    background-color: #45a049; /* Change the color on hover */
+}
+
+.create-list-button i {
+    margin-right: 5px; /* Adjust the space between the icon and text */
 }

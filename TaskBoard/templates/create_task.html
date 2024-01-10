@@ -1,9 +1,21 @@
-
-{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'CreateTask.css' %}">
+</head>
+<body>
+  {% block content %}
   <h2>Create Task</h2>
   <form method="post" action="{% url 'create_task' task_list.id %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Create Task</button>
   </form>
-{% endblock %}
+  {% endblock %}
+</body>
+</html>
+
