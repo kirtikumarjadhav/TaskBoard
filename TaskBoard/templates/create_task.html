@@ -1,0 +1,9 @@
+
+{% block content %}
+  <h2>Create Task</h2>
+  <form method="post" action="{% url 'create_task' task_list.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Task</button>
+  </form>
+{% endblock %}

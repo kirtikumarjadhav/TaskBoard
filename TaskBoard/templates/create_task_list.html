@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- create_task_list.html -->
+
+{% block content %}
+  <h2>Create Task List</h2>
+  <form method="post" action="{% url 'create_task_list' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create List</button>
+  </form>
+
+ 
+
+  <!-- Display existing tasks for the last created task list -->
+  <h2>Tasks in the last created list</h2>
+  {% if tasks %}
+    <ul>
+      {% for task in tasks %}
+        <li>{{ task.title }} - {{ task.description }} - Due: {{ task.due_date }} - Completed: {{ task.completed }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+   
+  {% endif %}
+
+  <!-- Form for creating a new task -->
+  
+  {% if task_list.id %}
+    <form method="post" action="{% url 'create_task' task_list.id %}">
+      {% csrf_token %}
+      {{ task_form.as_p }}
+      <button type="submit">Create Task</button>
+    </form>
+  {% else %}
+    
+  {% endif %}
+{% endblock %}
+
+</body>
+</html>

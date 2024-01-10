@@ -1,0 +1,125 @@
+/* task.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.task-list-container {
+    display: flex;
+    overflow-x: auto;  /* Enable horizontal scrolling */
+}
+
+.task-list-box {
+    flex: 0 0 auto;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.task-list-box h2 {
+    margin-bottom: 10px;
+}
+
+.task-list-box ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.task-list-box li {
+    margin-bottom: 8px;
+}
+
+.task-list-box a {
+    margin-right: 10px;
+    color: #3366cc;
+    text-decoration: none;
+}
+
+.task-list-box a:hover {
+    text-decoration: underline;
+}
+
+/* Style for create new list box */
+.task-list-box.create-list-box {
+    background-color: #e2e2e2;
+}
+
+/* Style for delete and edit buttons */
+.task-list-box .action-buttons {
+    margin-top: 10px;
+}
+
+.task-list-box .action-buttons a {
+    margin-right: 10px;
+    color: #cc3333;
+    text-decoration: none;
+}
+
+.task-list-box .action-buttons a:hover {
+    text-decoration: underline;
+}
+
+.task-list-box li {
+    margin-bottom: 8px;
+    border: 1px solid #ddd;  /* Border around each task */
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* Add this to your Tasks.css or create a new CSS file */
+
+/* Styles for the login button */
+div a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #3498db; /* Change the color as needed */
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+div a:hover {
+    background-color: #2980b9; /* Change the color for hover effect */
+}
+
+/* Add this to your Tasks.css or create a new CSS file */
+
+/* Styles for the login button */
+.login-container {
+    text-align: right;
+    padding: 10px;
+}
+
+.login-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db; /* Change the color as needed */
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #879299; /* Change the color for hover effect */
+}
+
+
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}

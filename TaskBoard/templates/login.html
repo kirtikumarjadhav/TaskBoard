@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'log.css' %}">
+</head>
+
+<body  >
+    
+    <h2 class="logo" >
+        
+    </h2>
+   
+    <div   class="container">
+    
+    <div class="header-bar">
+        <h1>Login</h1>
+    </div>
+
+    
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="button" type="submit" value="Login">
+        </form>
+        <p>By continuing with Login, you agree to Todolist’s Terms of Service and Privacy Policy.</p>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    </div>
+    <div>
+        <marquee width="90%" direction="left" height="100px" class="aaa">“First thing’s first, before you go to bed at night, write your to-do list for tomorrow. Next, set your alarm clock for early in the morning, get up and go do some kind of physical activity.” — Jocko Willink</marquee>
+    </div>
+   
+
+</div>
+
+<div>
+    <img class="aa" fetchpriority="high" width="800" height="600" src="{% static 'aa.jpg' %}">
+    
+</div>
+
+
+    
+</body>
+</html>
+
+
+
